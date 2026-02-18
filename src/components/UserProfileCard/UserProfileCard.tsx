@@ -5,7 +5,7 @@ function UserProfileCard({user , showEmail, showRole, onEdit, children }:UserPro
     
     return (
         <>
-            <div className="max-w-md m-4 border border-gray-200 rounded-lg shadow-md p-6 max-w-sm">
+            <div className="m-4 border border-gray-200 rounded-lg shadow-md p-6 max-w-sm">
                 <div className="flex sm:flex-row flex-col sm:gap-0 gap-4 items-center space-x-4">
                     {user.avatarUrl && <div><img className="rounded-full" src={user.avatarUrl} /></div>}
                     <div className="flex-1">
