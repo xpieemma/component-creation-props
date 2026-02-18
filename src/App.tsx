@@ -18,7 +18,7 @@ function App() {
     name: 'Wireless Headphones',
     price: 199.99,
     description: 'High-quality wireless headphones with noise cancellation.',
-    imageUrl: 'https://picsum.photos/200/200?v=2',
+    imageUrl: 'https://picsum.photos/600/600?v=2',
     inStock: true
   };
 
