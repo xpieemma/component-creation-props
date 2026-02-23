@@ -20,7 +20,7 @@ const App = () => {
   const [user, setUser] = useState(INITIAL_USER);
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleUserUpdate = (updatedFields: User) => {
+  const handleUserUpdate = (updatedFields: Partial<User>) => {
     setUser(prev => ({ ...prev, ...updatedFields }));
     setIsEditing(false);
     showAlert('success', 'Profile updated successfully!');
