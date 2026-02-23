@@ -1,40 +1,53 @@
 import type { ProductDisplayProps } from "../../types";
 
-function ProductDisplay({ product, showDescription, showStockStatus, onAddToCart, children}:ProductDisplayProps){
-    return (
-        <div className="max-w-md m-4 border border-gray-200 rounded-lg shadow-md overflow-hidden">
-            {product.imageUrl && <img src={product.imageUrl} alt={product.name} className="w-full h-48 object-cover" />}
-            <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-900">
-                    {product.name}
-                </h3>
-                <p className="text-xl font-bold text-blue-600 mt-2">
-                    {product.price}
-                </p>
-                {showDescription && (
-                    <p className="text-gray-600 mt-2">
-                        {product.description}
-                    </p>
-                )}
-                {showStockStatus && (
-                    <p className="mt-2 text-green-600">
-                        {product.inStock==true ? "In Stock" : "Out of Stock"}
-                    </p>
-                )}
-                {onAddToCart && (
-                    <button
-                     onClick={()=>onAddToCart(product.id)}
-                     className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
-                    >
-                        Add to Cart
-                    </button>
-                )}
-                <div className="mt-4">
-                    {children}
-                </div>
-            </div>
+function ProductDisplay({ product, showDescription, showStockStatus, onAddToCart, children }: ProductDisplayProps) {
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(price);
+  };
+
+  return (
+    <div className="flex flex-row gap-3.5 border border-gray-300 m-3.5 p-4 rounded-lg shadow-sm">
+      {product.imageUrl && (
+        <div className="flex-shrink-0">
+          <img 
+            src={product.imageUrl} 
+            alt={product.name}
+            className="w-24 h-24 object-cover rounded"
+          />
         </div>
-    )
+      )}
+      <div className="flex-1">
+        <h3 className="font-bold text-lg">{product.name}</h3>
+        <p className="text-sm text-gray-600">Product ID: {product.id}</p>
+        <p className="text-green-600 font-semibold">{formatPrice(product.price)}</p>
+        
+        {showDescription && (
+          <p className="text-sm text-gray-700 mt-2">{product.description}</p>
+        )}
+        
+        {showStockStatus && (
+          <p className={`text-sm mt-1 ${product.inStock ? 'text-green-600' : 'text-red-600'}`}>
+            {product.inStock ? '✓ In Stock' : '✗ Out of Stock'}
+          </p>
+        )}
+        
+        {onAddToCart && (
+          <button
+            onClick={() => onAddToCart(product.id)}
+            className="border border-gray-300 px-4 py-1.5 rounded hover:bg-gray-50 mt-3"
+            disabled={!product.inStock}
+          >
+            {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+          </button>
+        )}
+        
+        {children}
+      </div>
+    </div>
+  );
 }
 
 export default ProductDisplay;
