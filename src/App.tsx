@@ -8,6 +8,7 @@ import ProductDisplay from './components/ProductDisplay/ProductDisplay';
 import CartSummary from './components/cart/CartSummary';
 import EditProfileForm from './components/UserProfileCard/EditProfile';
 import { useCart } from './components/utils/UseCart';
+import type { User } from '.';
 
 
 const App = () => {
@@ -19,7 +20,7 @@ const App = () => {
   const [user, setUser] = useState(INITIAL_USER);
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleUserUpdate = (updatedFields: any) => {
+  const handleUserUpdate = (updatedFields: User) => {
     setUser(prev => ({ ...prev, ...updatedFields }));
     setIsEditing(false);
     showAlert('success', 'Profile updated successfully!');
